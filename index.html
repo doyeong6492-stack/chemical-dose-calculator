@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#e9faff">
 <meta name="description" content="개인용 정수장 약품 투입량 계산기 — 응집제·염소·후차염">
-<link rel="icon" type="image/png" href="./icon-192-noborder-v1.5.png">
-<link rel="apple-touch-icon" href="./icon-192-noborder-v1.5.png">
-<link rel="manifest" href="./manifest.webmanifest?v=v1.5-noborder">
+<link rel="icon" type="image/png" href="./icon-192-white-v1.6-white.png">
+<link rel="apple-touch-icon" href="./icon-192-white-v1.6-white.png">
+<link rel="manifest" href="./manifest.webmanifest?v=v1.6-white">
 <title>약품 투입량 계산기</title>
 <style>
 :root{--ink:#1c3541;--muted:#6b7f8b;--line:#d6e9ee;--sky:#f0fcff;--aqua:#169dab;--aqua2:#0b8395;--mint:#daf4f8;--card:#fff;--soft:#f2f9fb;--shadow:0 12px 34px rgba(37,113,143,.08)}
@@ -62,7 +62,7 @@ footer{margin-top:8px}
 <body>
 <main>
 <section class="app-card" aria-label="약품 투입량 계산기">
-<header><img src="./icon-192-noborder-v1.5.png" alt="" aria-hidden="true"><div><h1>약품 투입량 계산기</h1><p class="subtitle">정수장 현장 점검용 · 개인 계산기</p></div></header>
+<header><img src="./icon-192-white-v1.6-white.png" alt="" aria-hidden="true"><div><h1>약품 투입량 계산기</h1><p class="subtitle">정수장 현장 점검용 · 개인 계산기</p></div></header>
 <div class="tabs" role="tablist" aria-label="약품 종류">
 <button type="button" class="tab" role="tab" data-tab="coagulant" aria-selected="true">응집제</button>
 <button type="button" class="tab" role="tab" data-tab="chlorine" aria-selected="false">염소</button>
@@ -114,7 +114,7 @@ flowEl.addEventListener('input',()=>{state.flow=flowEl.value;persist();update()}
 // Android Chrome: click/focus on editable text selects full old value, so typing replaces it.
 for(const el of [flowEl,ppmEl]){el.addEventListener('focus',()=>{if(el.value){requestAnimationFrame(()=>{try{el.select()}catch(_){}})}});el.addEventListener('click',()=>{if(el.value){try{el.select()}catch(_){}}});}
 render();
-if('serviceWorker'in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=v1.5-noborder').catch(()=>{}));}
+if('serviceWorker'in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=v1.6-white').catch(()=>{}));}
 })();
 </script>
 </body></html>
