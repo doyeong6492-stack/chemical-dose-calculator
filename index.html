@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#e9faff">
+<meta name="description" content="개인용 정수장 약품 투입량 계산기 — 응집제·염소·후차염">
+<link rel="icon" type="image/png" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="manifest" href="./manifest.webmanifest">
+<title>약품 투입량 계산기</title>
+<style>
+:root{--ink:#1c3541;--muted:#6b7f8b;--line:#d6e9ee;--sky:#f0fcff;--aqua:#169dab;--aqua2:#0b8395;--mint:#daf4f8;--card:#fff;--soft:#f2f9fb;--shadow:0 12px 34px rgba(37,113,143,.08)}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans KR","Malgun Gothic",sans-serif;background:linear-gradient(180deg,#eafaff 0,#f6fbfc 310px,#f7fbfc 100%);color:var(--ink);-webkit-tap-highlight-color:transparent;min-height:100vh}main{max-width:580px;margin:0 auto;padding:22px 15px max(28px,env(safe-area-inset-bottom))}.app-card{background:var(--card);border:1px solid #d7ebef;border-radius:27px;padding:23px 20px 20px;box-shadow:var(--shadow)}header{display:flex;align-items:center;gap:11px;margin-bottom:22px}header img{width:49px;height:49px;object-fit:contain;border-radius:14px}h1{font-size:clamp(21px,5.5vw,27px);letter-spacing:-.055em;line-height:1.26;margin:0;font-weight:800}.subtitle{font-size:12px;margin:4px 0 0;color:#7d919b}.tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;background:#edf6f8;padding:5px;border-radius:16px;margin-bottom:22px}.tab{border:0;background:transparent;color:#718a96;border-radius:12px;min-height:48px;font-size:17px;font-weight:750;cursor:pointer}.tab[aria-selected="true"]{color:#086b7d;background:#fff;box-shadow:0 2px 9px rgba(26,102,124,.12)}.stages{margin:-3px 0 19px}.stages .label{font-size:13px;margin-bottom:9px}.stage-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.stage-btn{border:1px solid #d5e8ed;background:#f5fbfd;color:#738c98;padding:11px 2px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer}.stage-btn[aria-pressed="true"]{border-color:var(--aqua);background:#ddf7fa;color:#08778a}.description{font-size:13px;color:#6b8994;margin:-8px 0 18px}.field{margin-bottom:19px}.field label,.label{display:block;font-weight:700;font-size:15px;letter-spacing:-.015em;margin-bottom:9px;color:#486674}.input-wrap{position:relative}input{width:100%;height:62px;border:1.5px solid #cce2e7;border-radius:17px;background:#fff;padding:0 15px;font:700 25px/1 system-ui,-apple-system,sans-serif;color:var(--ink);outline:0;transition:.16s;border-color:var(--line);font-variant-numeric:tabular-nums}input:focus{border-color:#14a6b4;box-shadow:0 0 0 3px rgba(13,168,186,.13)}input::placeholder{color:#afc0c8;font-weight:450;font-size:17px}.result{margin-top:25px;padding:22px 20px;border-radius:21px;background:linear-gradient(155deg,#e9f9fb,#f1f9fc);border:1px solid #d1ecf1}.result-part+.result-part{border-top:1px solid #cfe5e9;margin-top:19px;padding-top:18px}.result-label{font-size:15px;color:#52737f;font-weight:750}.value-line{display:flex;align-items:baseline;flex-wrap:wrap;column-gap:10px;margin-top:7px}.value{font-size:clamp(37px,11vw,51px);font-weight:850;line-height:1.2;letter-spacing:-.055em;color:#087e93;font-variant-numeric:tabular-nums}.unit{font-size:19px;font-weight:650;color:#627a86}.helper{font-size:13px;color:#657f8a;line-height:1.65;margin:17px 3px 0}.helper strong{color:#527381}details{margin-top:17px;border-top:1px solid #e4eff1;padding-top:14px}summary{font-size:13px;font-weight:700;cursor:pointer;color:#68838f}details p{font-size:12.5px;line-height:1.7;color:#607e8c;margin:9px 0 0}footer{text-align:center;margin:17px auto 0;color:#8da3ad;font-size:12px}.invalid{font-size:12px;color:#bf624f;margin-top:7px;display:none}.invalid.show{display:block}.hidden{display:none!important}@media (max-width:350px){main{padding:12px 8px}.app-card{padding:18px 14px}.tab{font-size:15px}.value{font-size:37px}}@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<section class="app-card" aria-label="약품 투입량 계산기">
+<header><img src="./icon-192.png" alt="" aria-hidden="true"><div><h1>약품 투입량 계산기</h1><p class="subtitle">정수장 현장 점검용 · 개인 계산기</p></div></header>
+<div class="tabs" role="tablist" aria-label="약품 종류">
+<button type="button" class="tab" role="tab" data-tab="coagulant" aria-selected="true">응집제</button>
+<button type="button" class="tab" role="tab" data-tab="chlorine" aria-selected="false">염소</button>
+<button type="button" class="tab" role="tab" data-tab="hypochlorite" aria-selected="false">차염</button>
+</div>
+<div id="stages" class="stages hidden"><span class="label">염소 주입 위치</span><div class="stage-tabs" aria-label="염소 주입 위치"><button type="button" class="stage-btn" data-stage="pre" aria-pressed="true">전염소</button><button type="button" class="stage-btn" data-stage="mid" aria-pressed="false">중염소</button><button type="button" class="stage-btn" data-stage="post" aria-pressed="false">후염소</button></div></div>
+<p id="description" class="description hidden">후차염 투입량 확인</p>
+<div class="field"><label for="flow">원수 + 회수유량 (m³/h)</label><div class="input-wrap"><input id="flow" type="text" inputmode="decimal" autocomplete="off" enterkeyhint="next" placeholder="합산유량 입력" aria-describedby="flowError"></div><div class="invalid" id="flowError">0 이상의 숫자를 입력해 주세요.</div></div>
+<div class="field"><label for="ppm">목표 주입률 (ppm)</label><div class="input-wrap"><input id="ppm" type="text" inputmode="decimal" autocomplete="off" enterkeyhint="done" placeholder="주입률 입력" aria-describedby="ppmError"></div><div class="invalid" id="ppmError">0 이상의 숫자를 입력해 주세요.</div></div>
+<section class="result" aria-live="polite" aria-label="계산 결과">
+<div class="result-part"><div id="mainResultLabel" class="result-label">분당 목표 투입량</div><div class="value-line"><span id="mainResult" class="value">—</span><span id="mainUnit" class="unit">L/min</span></div></div>
+<div id="secondaryBox" class="result-part"><div class="result-label">10초당 목표 투입량</div><div class="value-line"><span id="secondaryResult" class="value">—</span><span class="unit">mL/10초</span></div></div>
+</section>
+<p class="helper"><strong>계산 참고용</strong> · SCADA 표시 및 현장 실측값과 비교해 주세요. 실제 투입 조정은 사업소 운전 기준에 따라 판단해야 합니다.</p>
+<details><summary>계산 기준 확인</summary><p id="formula">응집제: (합산유량 × ppm) ÷ 60,000 = L/min<br>10초당 mL: (합산유량 × ppm) ÷ 360</p><p>응집제의 약품 농도·밀도 보정 여부는 현장 적용 기준에 따라 달라질 수 있습니다. 차염은 유효염소 12%, 밀도 1 kg/L를 가정한 잠정식입니다. 실제 운전값에 적용하기 전 약품 사양과 계산 기준을 확인하세요.</p></details>
+</section>
+<footer>입력값은 이 기기에만 저장됩니다 · 오프라인 사용 지원</footer>
+</main>
+<script>
+(()=>{'use strict';
+const KEY='chemical-dose-calculator:v1';
+const defaults={tab:'coagulant',stage:'pre',flow:'',ppm:{coagulant:'',pre:'',mid:'',post:'',hypochlorite:''}};
+let saved={};try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(_){saved={}}
+const state={...defaults,...saved,ppm:{...defaults.ppm,...(saved.ppm||{})}};
+if(!['coagulant','chlorine','hypochlorite'].includes(state.tab))state.tab='coagulant';
+if(!['pre','mid','post'].includes(state.stage))state.stage='pre';
+const $=id=>document.getElementById(id);
+const flowEl=$('flow'),ppmEl=$('ppm'),stages=$('stages'),desc=$('description');
+function currentKey(){return state.tab==='chlorine'?state.stage:state.tab}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(_){}}
+function parseValue(raw){const s=String(raw).trim().replaceAll(',','');if(!s||!/^\d+(?:\.\d*)?$/.test(s))return null;const n=Number(s);return Number.isFinite(n)&&n>=0?n:null}
+function output(value,digits){return value===null||!Number.isFinite(value)?'—':value.toLocaleString('ko-KR',{minimumFractionDigits:digits,maximumFractionDigits:digits})}
+function update(){const flow=parseValue(flowEl.value),ppm=parseValue(ppmEl.value);const valid=flow!==null&&ppm!==null;
+$('flowError').classList.toggle('show',flowEl.value.trim()!==''&&flow===null);
+$('ppmError').classList.toggle('show',ppmEl.value.trim()!==''&&ppm===null);
+let main=null,secondary=null;
+if(valid){if(state.tab==='coagulant'){main=flow*ppm/60000;secondary=flow*ppm/360}else if(state.tab==='chlorine'){main=flow*ppm/1000}else{main=flow*ppm/120}}
+$('mainResult').textContent=output(main,2);$('secondaryResult').textContent=output(secondary,0);
+}
+function render(){document.querySelectorAll('[data-tab]').forEach(el=>{let on=el.dataset.tab===state.tab;el.setAttribute('aria-selected',String(on));el.tabIndex=on?0:-1});
+stages.classList.toggle('hidden',state.tab!=='chlorine');desc.classList.toggle('hidden',state.tab!=='hypochlorite');
+document.querySelectorAll('[data-stage]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.stage===state.stage)));
+$('secondaryBox').classList.toggle('hidden',state.tab!=='coagulant');$('mainResultLabel').textContent=state.tab==='coagulant'?'분당 목표 투입량':'시간당 목표 투입량';$('mainUnit').textContent=state.tab==='coagulant'?'L/min':state.tab==='chlorine'?'kg/h':'L/h';
+$('formula').innerHTML=state.tab==='coagulant'?'응집제: (합산유량 × ppm) ÷ 60,000 = L/min<br>10초당 mL: (합산유량 × ppm) ÷ 360':state.tab==='chlorine'?'염소: (합산유량 × ppm) ÷ 1,000 = kg/h':'차염: (합산유량 × ppm) ÷ (0.12 × 1,000) = L/h (현장 잠정식)';
+flowEl.value=state.flow;ppmEl.value=state.ppm[currentKey()]??'';update();}
+document.querySelectorAll('[data-tab]').forEach(btn=>btn.addEventListener('click',()=>{state.tab=btn.dataset.tab;persist();render()}));
+document.querySelectorAll('[data-stage]').forEach(btn=>btn.addEventListener('click',()=>{state.stage=btn.dataset.stage;persist();render()}));
+flowEl.addEventListener('input',()=>{state.flow=flowEl.value;persist();update()});ppmEl.addEventListener('input',()=>{state.ppm[currentKey()]=ppmEl.value;persist();update()});
+// Android Chrome: click/focus on editable text selects full old value, so typing replaces it.
+for(const el of [flowEl,ppmEl]){el.addEventListener('focus',()=>{if(el.value){requestAnimationFrame(()=>{try{el.select()}catch(_){}})}});el.addEventListener('click',()=>{if(el.value){try{el.select()}catch(_){}}});}
+render();
+if('serviceWorker'in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
+})();
+</script>
+</body></html>
