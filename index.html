@@ -12,6 +12,51 @@
 <style>
 :root{--ink:#1c3541;--muted:#6b7f8b;--line:#d6e9ee;--sky:#f0fcff;--aqua:#169dab;--aqua2:#0b8395;--mint:#daf4f8;--card:#fff;--soft:#f2f9fb;--shadow:0 12px 34px rgba(37,113,143,.08)}
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans KR","Malgun Gothic",sans-serif;background:linear-gradient(180deg,#eafaff 0,#f6fbfc 310px,#f7fbfc 100%);color:var(--ink);-webkit-tap-highlight-color:transparent;min-height:100vh}main{max-width:580px;margin:0 auto;padding:22px 15px max(28px,env(safe-area-inset-bottom))}.app-card{background:var(--card);border:1px solid #d7ebef;border-radius:27px;padding:23px 20px 20px;box-shadow:var(--shadow)}header{display:flex;align-items:center;gap:11px;margin-bottom:22px}header img{width:49px;height:49px;object-fit:contain;border-radius:14px}h1{font-size:clamp(21px,5.5vw,27px);letter-spacing:-.055em;line-height:1.26;margin:0;font-weight:800}.subtitle{font-size:12px;margin:4px 0 0;color:#7d919b}.tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;background:#edf6f8;padding:5px;border-radius:16px;margin-bottom:22px}.tab{border:0;background:transparent;color:#718a96;border-radius:12px;min-height:48px;font-size:17px;font-weight:750;cursor:pointer}.tab[aria-selected="true"]{color:#086b7d;background:#fff;box-shadow:0 2px 9px rgba(26,102,124,.12)}.stages{margin:-3px 0 19px}.stages .label{font-size:13px;margin-bottom:9px}.stage-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.stage-btn{border:1px solid #d5e8ed;background:#f5fbfd;color:#738c98;padding:11px 2px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer}.stage-btn[aria-pressed="true"]{border-color:var(--aqua);background:#ddf7fa;color:#08778a}.description{font-size:13px;color:#6b8994;margin:-8px 0 18px}.field{margin-bottom:19px}.field label,.label{display:block;font-weight:700;font-size:15px;letter-spacing:-.015em;margin-bottom:9px;color:#486674}.input-wrap{position:relative}input{width:100%;height:62px;border:1.5px solid #cce2e7;border-radius:17px;background:#fff;padding:0 15px;font:700 25px/1 system-ui,-apple-system,sans-serif;color:var(--ink);outline:0;transition:.16s;border-color:var(--line);font-variant-numeric:tabular-nums}input:focus{border-color:#14a6b4;box-shadow:0 0 0 3px rgba(13,168,186,.13)}input::placeholder{color:#afc0c8;font-weight:450;font-size:17px}.result{margin-top:25px;padding:22px 20px;border-radius:21px;background:linear-gradient(155deg,#e9f9fb,#f1f9fc);border:1px solid #d1ecf1}.result-part+.result-part{border-top:1px solid #cfe5e9;margin-top:19px;padding-top:18px}.result-label{font-size:15px;color:#52737f;font-weight:750}.value-line{display:flex;align-items:baseline;flex-wrap:wrap;column-gap:10px;margin-top:7px}.value{font-size:clamp(37px,11vw,51px);font-weight:850;line-height:1.2;letter-spacing:-.055em;color:#087e93;font-variant-numeric:tabular-nums}.unit{font-size:19px;font-weight:650;color:#627a86}.helper{font-size:13px;color:#657f8a;line-height:1.65;margin:17px 3px 0}.helper strong{color:#527381}details{margin-top:17px;border-top:1px solid #e4eff1;padding-top:14px}summary{font-size:13px;font-weight:700;cursor:pointer;color:#68838f}details p{font-size:12.5px;line-height:1.7;color:#607e8c;margin:9px 0 0}footer{text-align:center;margin:17px auto 0;color:#8da3ad;font-size:12px}.invalid{font-size:12px;color:#bf624f;margin-top:7px;display:none}.invalid.show{display:block}.hidden{display:none!important}@media (max-width:350px){main{padding:12px 8px}.app-card{padding:18px 14px}.tab{font-size:15px}.value{font-size:37px}}@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* v1.1: Galaxy compact layout — keep inputs and results on one screen */
+main{padding:12px 11px max(14px,env(safe-area-inset-bottom))}
+.app-card{padding:15px 16px 14px;border-radius:23px}
+header{gap:9px;margin-bottom:13px}
+header img{width:42px;height:42px;border-radius:12px}
+h1{font-size:clamp(20px,5.3vw,25px)}
+.subtitle{font-size:11px;margin-top:2px}
+.tabs{margin-bottom:14px;border-radius:14px;padding:4px}
+.tab{min-height:41px;font-size:16px;border-radius:11px}
+.stages{margin:-2px 0 12px}
+.stages .label{margin-bottom:6px}
+.stage-btn{padding:9px 2px}
+.description{margin:-6px 0 11px}
+.field{margin-bottom:12px}
+.field label,.label{font-size:14px;margin-bottom:6px}
+input{height:49px;border-radius:13px;padding:0 13px;font-size:23px}
+.result{margin-top:14px;padding:15px 16px;border-radius:17px}
+.result-part+.result-part{margin-top:12px;padding-top:12px}
+.result-label{font-size:14px}
+.value-line{margin-top:4px;column-gap:8px}
+.value{font-size:clamp(35px,10vw,44px);line-height:1.12}
+.unit{font-size:17px}
+.helper{margin:11px 2px 0;font-size:11.5px;line-height:1.45}
+details{margin-top:10px;padding-top:10px}
+footer{margin-top:10px;font-size:11px}
+@media(max-width:350px){main{padding:9px 8px}.app-card{padding:13px 12px}.tab{font-size:14px}.value{font-size:34px}}
+
+/* v1.2: further tighten vertical whitespace; all calculator logic unchanged */
+main{padding:8px 10px max(10px,env(safe-area-inset-bottom))}
+.app-card{padding:12px 15px 12px}
+header{margin-bottom:10px}
+header img{width:39px;height:39px}
+.subtitle{font-size:10px}
+.tabs{margin-bottom:11px}
+.tab{min-height:44px}
+.field{margin-bottom:10px}
+.field label,.label{margin-bottom:4px}
+input{height:47px}
+.result{margin-top:10px;padding:13px 15px}
+.result-part+.result-part{margin-top:9px;padding-top:9px}
+.value{font-size:clamp(35px,9.8vw,43px)}
+.helper{margin-top:9px;line-height:1.3}
+details{margin-top:9px;padding-top:8px}
+footer{margin-top:8px}
 </style>
 </head>
 <body>
